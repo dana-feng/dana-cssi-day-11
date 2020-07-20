@@ -24,27 +24,30 @@ function setup() {
 }
 
 function draw() {
-  
-    background(backgroundColor);
-    mousePosition = {
-      x: mouseX,
-      y: mouseY
-    };
-    ellipse(marcoPosition.x, marcoPosition.y, 20, 20);
-    if (mouseIsPressed) {
-      let com = compute(mousePosition, marcoPosition);
-      fill(255);
-      text(`${com}`, 20, 20);
-    }
+  background(backgroundColor);
+  fill(255);
+  textSize(20);
+  text("Click around to find the invisible dot!", 80, 30);
+  mousePosition = {
+    x: mouseX,
+    y: mouseY
+  };
+  fill(0);
+  ellipse(marcoPosition.x, marcoPosition.y, 20, 20);
+  if (mouseIsPressed) {
+    let com = compute(mousePosition, marcoPosition);
+    fill(255);
+    text(`${com}`, 80, 50);
+  }
   if (gameOver) {
-    background(40);
-    textSize(60);
-    text()
-    
-    
+    background(40, 50, 100);
+    textSize(40);
+    fill(255);
+    text("YOU FOUND THE DOT!", 30, height / 2);
+    fill(255);
+    ellipse(marcoPosition.x, marcoPosition.y, 20, 20);
   }
-  }
-  
+}
 
 function computeDistance(point1, point2) {
   let deltaX = point1.x - point2.x;
@@ -54,16 +57,14 @@ function computeDistance(point1, point2) {
 }
 function compute(point1, point2) {
   let distance = computeDistance(point1, point2);
-  fill(255);
-  text(`distance: ${distance}`, 20, 60);
+  textSize(20);
   if (distance > 200) {
     return "You are cold";
   } else if (distance > 50) {
     return "You are warmer";
   } else if (distance > 10) {
     return "You are red hot";
-  } else if (distance < 10) {
-    gameOver = true
-    return "YOU WON";
+  } else if (distance <= 10) {
+    gameOver = true;
   }
 }

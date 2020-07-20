@@ -5,7 +5,7 @@
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
           keyCode, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize */
 
-let backgroundColor, spherePosition, rectPosition
+let backgroundColor, spherePosition, rectPosition, mousePosition
 
 function setup() {
   // Canvas & color settings
@@ -21,6 +21,11 @@ function setup() {
     "x" : 130,
     "y" : 140
   };
+  
+  mousePosition ={
+    "x" : mouseX,
+    "y" : mouseY
+  }
 }
 
 function draw() {
@@ -30,7 +35,10 @@ function draw() {
   line(spherePosition.x, spherePosition.y, rectPosition.x, rectPosition.y);
   
   let distance1 = computeDistance(spherePosition, rectPosition);
-  text(`the circle and the sphere are ${distance1} units apart.`, 20,20);
+  text(`the circle and the rectangle are ${Math.round(distance1)} units apart.`, 20,20);
+  
+  let distance2 = computeDistance(mousePosition, spherePosition);
+  text(`the circle and your mouse are ${Math.round(distance2)} units apart. `, 20, 20);
 }
 
 function mousePressed() {
@@ -42,5 +50,8 @@ function computeDistance(point1, point2){
   let deltaY = point1.y - point2.y;
   let distance = (deltaX **2 + deltaY **2)**0.5;
   return distance;
+  
+}
+function computeCategoryOfDistance(point1, point2){
   
 }

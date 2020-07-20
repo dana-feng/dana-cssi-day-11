@@ -28,9 +28,19 @@ function draw() {
   ellipse(spherePosition.x, spherePosition.y, 20, 20);
   rect(rectPosition.x, rectPosition.y, 20, 20);
   line(spherePosition.x, spherePosition.y, rectPosition.x, rectPosition.y);
+  
+  let distance1 = computeDistance(spherePosition, rectPosition);
+  text(`the circle and the sphere are ${distance1} units apart.`, 20,20);
 }
 
 function mousePressed() {
   spherePosition.x = random(width);
   spherePosition.y = random(height);
+}
+function computeDistance(point1, point2){
+  let deltaX = point1.x - point2.x;
+  let deltaY = point1.y - point2.y;
+  let distance = (deltaX **2 + deltaY **2)**0.5;
+  return distance;
+  
 }

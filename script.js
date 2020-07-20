@@ -10,12 +10,11 @@ let backgroundColor, marcoPosition, rectPosition, mousePosition
 function setup() {
   // Canvas & color settings
   createCanvas(500, 400);
-  colorMode(HSB, 360, 100, 100);
-  backgroundColor = 360;
+  backgroundColor = 0;
   // This variable contains a JSON object
   marcoPosition = {
-    "x": 50,
-    "y": 50
+    "x": random(width),
+    "y": random(height)
   }
   mousePosition ={
     "x" : mouseX,
@@ -25,41 +24,42 @@ function setup() {
 
 function draw() {
   background(backgroundColor);
-  ellipse(spherePosition.x, spherePosition.y, 20, 20);
-  rect(rectPosition.x, rectPosition.y, 20, 20);
-  line(spherePosition.x, spherePosition.y, rectPosition.x, rectPosition.y);
-  
-  let distance1 = computeDistance(spherePosition, rectPosition);
-  text(`the circle and the rectangle are ${Math.round(distance1)} units apart.`, 20,20);
-  
-  let distance2 = computeDistance(mousePosition, spherePosition);
-  text(`the circle and your mouse are ${Math.round(distance2)} units apart; you're ${computeCategoryOfDistance(mousePosition, spherePosition)} `, 20, 20);
+  ellipse(marcoPosition.x, marcoPosition.y, 20, 20); 
+  if(mouseIsPressed){
+    let com = compute(mousePosition, marcoPosition);
+    fill(255);
+    text(`you are ${com}`, 20, 20);
+  }
 }
 
-function mousePressed() {
-  com = compute(marcoPosition, mousePosition);
-  text(`you are ${com} towards the goal`);
-}
+
 function computeDistance(point1, point2){
   let deltaX = point1.x - point2.x;
+  console.log(deltaX);
   let deltaY = point1.y - point2.y;
+  console.log(deltaY);
   let distance = (deltaX **2 + deltaY **2)**0.5;
   return distance;
   
 }
 function compute(point1, point2){
   let distance = computeDistance(point1, point2);
+  fill(255);
+  text(`distance: ${distance}`, 20, 60);
   if(distance > 200){
-    backgroundColor = color(240,10,100);
-    return "cold";
+    fill(255);
+    text("cold", 20, 50);
+    return "colder";
   }
   else if (distance > 50){
-    backgroundColor = color(120,10,100);
+    fill(255);
+    text("warm", 20, 50);
     return "warmer";
     
   }
   else{
-    backgroundColor = color(0,10,100);
+    fill(255);
+    text("hot", 20, 50);
     return "red hot";
   }
 }

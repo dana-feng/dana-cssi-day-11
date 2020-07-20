@@ -5,23 +5,18 @@
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
           keyCode, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize */
 
-let backgroundColor, spherePosition, rectPosition, mousePosition
+let backgroundColor, marcoPosition, rectPosition, mousePosition
 
 function setup() {
   // Canvas & color settings
   createCanvas(500, 400);
   colorMode(HSB, 360, 100, 100);
-  backgroundColor = 95;
+  backgroundColor = 360;
   // This variable contains a JSON object
-  spherePosition = {
-    "x": 100,
-    "y": 100
+  marcoPosition = {
+    "x": 50,
+    "y": 50
   }
-  rectPosition = {
-    "x" : 130,
-    "y" : 140
-  };
-  
   mousePosition ={
     "x" : mouseX,
     "y" : mouseY
@@ -42,8 +37,8 @@ function draw() {
 }
 
 function mousePressed() {
-  spherePosition.x = random(width);
-  spherePosition.y = random(height);
+  com = compute(marcoPosition, mousePosition);
+  text(`you are ${com} towards the goal`);
 }
 function computeDistance(point1, point2){
   let deltaX = point1.x - point2.x;
@@ -52,7 +47,7 @@ function computeDistance(point1, point2){
   return distance;
   
 }
-function computeCategoryOfDistance(point1, point2){
+function compute(point1, point2){
   let distance = computeDistance(point1, point2);
   if(distance > 200){
     backgroundColor = color(240,10,100);

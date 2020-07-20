@@ -17,13 +17,17 @@ function setup() {
     "x": 100,
     "y": 100
   }
+  rectPosition = {
+    "x" : 130,
+    "y" : 140
+  };
 }
 
 function draw() {
   background(backgroundColor);
   ellipse(spherePosition.x, spherePosition.y, 20, 20);
-  // rect(rectPosition.x, rectPosition.y, 20, 20);
-  // line(spherePosition.x, spherePosition.y, rectPosition.x, rectPosition.y);
+  rect(rectPosition.x, rectPosition.y, 20, 20);
+  line(spherePosition.x, spherePosition.y, rectPosition.x, rectPosition.y);
 }
 
 function mousePressed() {

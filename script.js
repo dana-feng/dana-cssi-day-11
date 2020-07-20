@@ -38,7 +38,7 @@ function draw() {
   text(`the circle and the rectangle are ${Math.round(distance1)} units apart.`, 20,20);
   
   let distance2 = computeDistance(mousePosition, spherePosition);
-  text(`the circle and your mouse are ${Math.round(distance2)} units apart. `, 20, 20);
+  text(`the circle and your mouse are ${Math.round(distance2)} units apart; you're ${computeCategoryOfDistance(mousePosition, spherePosition)} `, 20, 20);
 }
 
 function mousePressed() {
@@ -53,5 +53,18 @@ function computeDistance(point1, point2){
   
 }
 function computeCategoryOfDistance(point1, point2){
-  
+  let distance = computeDistance(point1, point2);
+  if(distance > 200){
+    backgroundColor = color(240,10,100);
+    return "cold";
+  }
+  else if (distance > 50){
+    backgroundColor = color(120,10,100);
+    return "warmer";
+    
+  }
+  else{
+    backgroundColor = color(0,10,100);
+    return "red hot";
+  }
 }
